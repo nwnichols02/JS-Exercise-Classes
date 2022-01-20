@@ -61,25 +61,23 @@ class Person {
     return `${this.name} ${this.age}`
   }
 }
+const colm = new Person('cMoney', 23)
 
-const joe = new Person('joe', '21', 'pizza')
+colm.eat('burger');
+colm.eat('burger');
+colm.eat('burger');
+colm.eat('burger');
+colm.eat('burger');
+colm.eat('burger');
+colm.eat('burger');
+colm.eat('burger');
+colm.eat('burger');
+colm.eat('fries');
+colm.eat('fries')
+colm.eat('fries');
 
-console.log(joe.toString())
-
-// joe.eat('pizza');
-// joe.eat('pizza');
-// joe.eat('pizza');
-// joe.eat('pizza');
-// joe.eat('pizza');
-// joe.eat('pizza');
-// joe.eat('pizza');
-// joe.eat('pizza');
-// joe.eat('pizz');
-// joe.eat('piz');
-// joe.eat('pi');
-// joe.eat('p');
-// console.log(joe.stomach)
-// console.log(joe.stomach)
+console.log(colm.stomach)
+colm.poop()
 
 // 7 / 8 total passing
 /*
@@ -106,18 +104,36 @@ class Car {
   fill(gallons){
     this.tank += gallons;
   }
-  drive(distance){
-    let availableMiles = this.tank * this.milesPerGallon
-    if(availableMiles > distance){
-      this.odometer += distance;
-      this.tank - (distance/this.milesPerGallon);
-    } else if (availableMiles < distance) {
-      this.odometer += distance;
-      this.tank - (distance/this.milesPerGallon);
-      console.log(`I ran out of fuel at ${this.odometer - (availableMiles - distance)} miles!`)
+  // drive(distance){
+  //   let availableMiles = this.tank * this.milesPerGallon
+  //   if(availableMiles > distance){
+  //     this.odometer += distance;
+  //     this.tank - (distance/this.milesPerGallon);
+  //   } else if (availableMiles < distance) {
+  //     this.odometer += distance;
+  //     this.tank - (distance/this.milesPerGallon);
+  //     console.log(`I ran out of fuel at ${this.odometer - (availableMiles - distance)} miles!`)
+  //   }
+  // }
+    drive(distance){
+    const availableMiles = this.tank * this.milesPerGallon
+    let minusFuel = distance/this.milesPerGallon 
+    if(distance < availableMiles){
+      this.odometer += distance
+      this.tank = this.tank - minusFuel
+    } else {
+    this.odometer += availableMiles
+    this.tank = this.tank - availableMiles/this.milesPerGallon
+    return (`I ran out of fuel at ${this.odometer} miles!`)
     }
   }
 }
+
+const kia = new Car('kia', 32)
+
+kia.fill(2)
+kia.drive(100000)
+// console.log(kia)
 
 // 7 / 15 total passing
 
@@ -140,7 +156,7 @@ class Lambdasian {
     this.location = atr.location;
   }
   speak(){
-    console.log(`Hello my name is ${this.name}, I am from ${this.location}`)
+    return (`Hello my name is ${this.name}, I am from ${this.location}`)
   }
 }
 
@@ -166,16 +182,26 @@ class Instructor extends Lambdasian{
     this.specialty = atr.specialty;
     this.favLanguage = atr.favLanguage;
     this.catchPhrase = atr.catchPhrase;
-    this.student = atr.student
   }
   demo(subject){
-    console.log(`Today we are learning about ${subject}`)
+    return (`Today we are learning about ${subject}`)
   }
-  grade(subject){
-    console.log(`${this.student} receives a perfect score on ${subject}`)
+  grade(student, subject){
+    return (`${student.name} receives a perfect score on ${subject}`)
                   // this name. but need sto be sudents name
   }
 }
+
+const inst = new Instructor({
+  name: 'brit',
+  age: 25,
+  location: 'Canada',
+  specialty: 'code',
+  favLanguage: 'JS',
+  catchPhrase: 'u got this' 
+});
+
+inst.grade('joe', 'js');
 
 // 6 / 25 passing
 
@@ -202,13 +228,13 @@ class Student extends Lambdasian{
      this.favSubjects = atr.favSubjects;
    }
    listSubjects(){
-     console.log(`Loving ${this.favSubjects}!`)
+     return (`Loving ${this.favSubjects}!`)
    }
-   PRAassignment(subject){
-    console.log(`${this.name} has submitted a PR for ${subject}`)
+   PRAssignment(subject){
+    return (`${this.name} has submitted a PR for ${subject}`)
    }
    sprintChallenge(subject){
-    console.log(`${this.name} has begun sprint challenge on ${subject}`)
+    return (`${this.name} has begun sprint challenge on ${subject}`)
    }
 }
 
@@ -234,10 +260,10 @@ class ProjectManager extends Instructor{
      this.favInstructor = atr.favInstructor;
    }
    standUp(channel){
-     console.log(`${this.name} announces to ${channel}, @channel standy times!`)
+     return (`${this.name} announces to ${channel}, @channel standy times!`)
    }
-   debugsCode(subject){
-    console.log(`${this.name} debugs ${student.name}'s code on ${subject}`)
+   debugsCode(student, subject){
+    return (`${this.name} debugs ${student.name}'s code on ${subject}`)
                   //instructor      //student
   }
 }
